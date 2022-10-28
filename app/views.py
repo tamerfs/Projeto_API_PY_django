@@ -3,7 +3,7 @@ from django.http import JsonResponse
 
 
 def status(request):
-    return render(request, 'app/status.html')
+    return Response({"SERVER RUNING"}) #render(request, 'app/status.html')
 
 # def home(request):
 #     return JsonResponse({"nome": "Abude Abadia", "idade": 27})
@@ -17,5 +17,4 @@ from rest_framework.response import Response
 
 class homeApiView(APIView):
     def get(self, request, format=None):
-        return render(request, 'app/status.html')
-        #Response({"ACESSE OS END-POINTS LISTADOS A SEGUIR": "-->","Status do Server": "/**/status", "Servidor": "/**/provedores"}, status=200)
+        return Response({"ACESSE OS END-POINTS LISTADOS A SEGUIR": "-->","Status do Server": "/**/status", "Servidor": "/**/provedores"}, status=200)
