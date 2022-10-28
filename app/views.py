@@ -17,4 +17,5 @@ from rest_framework.response import Response
 
 class homeApiView(APIView):
     def get(self, request, format=None):
-        return Response({"ACESSE OS END-POINTS LISTADOS A SEGUIR": "-->","Status do Server": "/**/status", "Servidor": "/**/provedores"}, status=200)
+        return render(request, 'app/status.html')
+        #Response({"ACESSE OS END-POINTS LISTADOS A SEGUIR": "-->","Status do Server": "/**/status", "Servidor": "/**/provedores"}, status=200)

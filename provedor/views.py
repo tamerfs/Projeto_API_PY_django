@@ -8,7 +8,9 @@ from rest_framework.status import HTTP_200_OK, HTTP_201_CREATED, HTTP_400_BAD_RE
 class ProvedorAPIView(APIView):
     def get(self, request, format=None):
         provedores = Provedor.objects.all()
+        print("* PRINT D OBJETO PUXADO PROVEDORES =>  ",provedores)
         serializer = ProvedorSerializer(provedores, many=True)
+        print("* PRINT DE SERIALIZER DO PROVEDORES =>  ",serializer)
         return Response(serializer.data, status=HTTP_200_OK)
     
     def post(self, request, format=None):

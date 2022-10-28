@@ -18,3 +18,11 @@ VM python =>
 
 run server =>
 python manage.py runserver
+
+##  ENDPOINTS
+    path('', Home page)
+    path('admin/')
+    path('status/', Status se o serviço esta on)
+    path('provedores/', Buscar Provedores),
+    path('provedores/<int:id>/servico', Cadastrar Servico),
+    path('alunos/', Buscar Servico),

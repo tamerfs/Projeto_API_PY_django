@@ -10,11 +10,20 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
+# django_heroku.settings(locals())
+# import os
 from pathlib import Path
+
+# Configure Django App for Heroku.
+# import django_on_heroku
+# django_on_heroku.settings(locals())
+# TEST_RUNNER = 'django_on_heroku.HerokuDiscoverRunner'
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -25,7 +34,7 @@ SECRET_KEY = 'django-insecure-&g6_3@ih0bkzxkjej(1a(f1i!@ngat&jvse*1pr^0-6izr)29r
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -41,10 +50,12 @@ INSTALLED_APPS = [
     'provedor.apps.ProvedorConfig',
     'rest_framework',
     "corsheaders",
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     'django.middleware.common.CommonMiddleware',
@@ -68,6 +79,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
+            'debug': DEBUG,
         },
     },
 ]
@@ -78,10 +90,15 @@ WSGI_APPLICATION = 'myteacher.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'rhzobcea',
+        'USER': 'rhzobcea',
+        'PASSWORD': 'qOEZR-lk9dPCuyNY4XIzpcb5vkApqlyx',
+        'HOST': 'motty.db.elephantsql.com',
+        'PORT': '',
     }
 }
 
@@ -120,10 +137,23 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
+
+#STATIC_ROOT = os.path.join(PROJECT_ROOT, 'staticfiles')
 STATIC_URL = 'static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+
+
+# Extra places for collectstatic to find static files.
+# STATICFILES_DIRS = [     
+#     os.path.join(PROJECT_ROOT, 'static'),
+#  ]
+
+# Simplified static file serving.
+# https://warehouse.python.org/project/whitenoise/
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
@@ -138,6 +168,3 @@ REST_FRAMEWORK = {
     "COERCE_DECIMAL_TO_STRING": False
 }
 
-# Configure Django App for Heroku.
-import django_heroku
-django_heroku.settings(locals())

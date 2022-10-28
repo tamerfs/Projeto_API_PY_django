@@ -1,1 +1,1 @@
-web: gunicorn myteacher.wsgi
+web: gunicorn --chdir FromThePath FromThePath.wsgi
