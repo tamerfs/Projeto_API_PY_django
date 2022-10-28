@@ -1,16 +1,3 @@
-from django.shortcuts import render
-from django.http import JsonResponse
-
-
-def status(request):
-    return Response({"SERVER RUNING"}) #render(request, 'app/status.html')
-
-# def home(request):
-#     return JsonResponse({"nome": "Abude Abadia", "idade": 27})
-
-# Feito com REST framework
-
-
 from rest_framework.views import APIView
 from rest_framework.response import Response
 

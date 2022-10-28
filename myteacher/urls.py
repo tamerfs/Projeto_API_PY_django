@@ -16,14 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app.views import homeApiView
-# from app.views import home
-from app.views import status
 from provedor.views import ProvedorAPIView, CadastrarServicoAPIView, BuscarServicoAPIView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', homeApiView.as_view()),
-    path('status/', status),
     path('provedores/', ProvedorAPIView.as_view()),
     path('provedores/<int:id>/servico', CadastrarServicoAPIView.as_view()),
     path('alunos/', BuscarServicoAPIView.as_view()),
